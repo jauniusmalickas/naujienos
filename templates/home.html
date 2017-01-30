@@ -9,8 +9,15 @@
 </head>
 
 <body>
+
+
+
     <h1>Naujienos from provider: {{provider}}</h1>
-    {% for article in articles %}
+    <form>
+        <input type="text" name="provider" placeholder="provider" />
+        <input type="submit" value="Submit" />
+    </form>
+    <hr/> {% for article in articles %}
     <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
     <i>{{article.published}}</i><br/>
     <p>{{article.summary}}</p>

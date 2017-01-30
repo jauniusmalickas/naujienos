@@ -8,12 +8,16 @@ RSS_FEEDS = {'bbc': 'http://feeds.bbci.co.uk/news/rss.xml',
             'cnn': 'http://rss.cnn.com/rss/edition.rss',
             'fox': 'http://feeds.foxnews.com/foxnews/most-popular'}
 
+#using GET method to get feeds provider from URL like ?provider=bbc
 @app.route("/")
-@app.route("/<provider>")
+def get_news():
+    query = request.args.get('provider')
+    if not query or query.lower() not in RSS_FEEDS:
+        provider ='bbc'
+    else:
+        provider = query.lower()
 
-def get_news(provider='bbc'):
     feed = feedparser.parse(RSS_FEEDS[provider])
-   
     articles=feed['entries']
     if articles:
         return render_template('home.html', provider=provider, articles=articles)
