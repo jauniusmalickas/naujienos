@@ -8,10 +8,11 @@ RSS_FEEDS = {'bbc': 'http://feeds.bbci.co.uk/news/rss.xml',
             'cnn': 'http://rss.cnn.com/rss/edition.rss',
             'fox': 'http://feeds.foxnews.com/foxnews/most-popular'}
 
-#using GET method to get feeds provider from URL like ?provider=bbc
-@app.route("/")
+#using POST method to get feeds provider 
+@app.route("/", methods=['GET', 'POST'])
 def get_news():
-    query = request.args.get('provider')
+    #provider is obtained from form by method request.form.get
+    query = request.form.get('provider')
     if not query or query.lower() not in RSS_FEEDS:
         provider ='bbc'
     else:
